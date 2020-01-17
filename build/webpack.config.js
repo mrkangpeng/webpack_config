@@ -3,7 +3,7 @@
  * @Autor: kangpeng
  * @Date: 2020-01-14 14:54:42
  * @LastEditors  : kangpeng
- * @LastEditTime : 2020-01-17 09:48:21
+ * @LastEditTime : 2020-01-17 16:10:36
  */
 const path = require('path');
 const Webpack = require('webpack');
@@ -15,6 +15,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin') // 拆分css样
 const extractCss = new ExtractTextPlugin('index.css');
 const extractStylus = new ExtractTextPlugin('index.styl');
 const vueLoaderPlugin = require('vue-loader/lib/plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     mode: 'development', // 开发模式
     entry: ["@babel/polyfill", path.resolve(__dirname, '../src/main.js')], // 入口文件
@@ -30,7 +31,7 @@ module.exports = {
         new vueLoaderPlugin(),
         new Webpack.HotModuleReplacementPlugin(),
         extractCss,
-        extractStylus
+        extractStylus,
     ],
     module: {
         rules: [{
@@ -44,7 +45,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['vue-style-loader','css-loader', {
+                use: ['vue-style-loader', 'css-loader', {
                     loader: 'postcss-loader',
                     options: {
                         plugins: [require('autoprefixer')]
@@ -59,6 +60,15 @@ module.exports = {
                         plugins: [require('autoprefixer')]
                     }
                 }, 'stylus-loader']
+            },
+            {
+                test:/\.scss$/,
+                use:['vue-style-loader', 'css-loader', {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: [require('autoprefixer')]
+                    }
+                }, 'sass-loader']
             },
             {
                 test: /\.(jpe?g|png|gif)$/i, // 图片文件

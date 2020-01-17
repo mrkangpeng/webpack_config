@@ -3,11 +3,11 @@
  * @Autor: kangpeng
  * @Date: 2020-01-16 16:29:02
  * @LastEditors  : kangpeng
- * @LastEditTime : 2020-01-16 18:30:08
+ * @LastEditTime : 2020-01-17 15:52:09
  -->
 <template>
     <div class="app_content">
-        <h1>{{info}}</h1>
+        <el-button type="primary">点击</el-button>
     </div>
 </template>
 
